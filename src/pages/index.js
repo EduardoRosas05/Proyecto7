@@ -5,6 +5,29 @@ import styles from '@/styles/Home.module.css'
 
 const inter = Inter({ subsets: ['latin'] })
 
+const updateIncomes = async (req,res) => {
+
+  try{
+
+      let {id} = req.query;
+      await db.Income.update({...req.body},
+          {
+          where :{
+              id : id
+          },
+
+      })
+
+      res.json({
+          message: 'El ingreso fue actualizado'
+      })
+
+    }
+       catch (error){
+          res.status(400).json({ error: "error al momento de actualizar el ingreso"})
+  }
+}
+
 export default function Home() {
   return (
     <>
