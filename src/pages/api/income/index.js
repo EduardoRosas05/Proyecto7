@@ -48,3 +48,54 @@ const addIncomes = async (req, res) => {
         })
     }
 }
+
+const listIncomes = async (req, res) => {
+    try{
+        //los datos vienen del req.body
+        console.log(req.body);
+        //guardar cliente
+    const Incomes1 = await db.Income.findAll({
+        
+    });
+        
+        return res.json(Incomes1)
+    
+    }catch(error){
+        console.log(error);
+        let errors = []
+
+        if(error.errors){
+            //extrae la info
+            errors = error.errors.map((item) => ({
+                error: item.message, 
+                field: item.path,
+            }));
+        }
+
+        return res.status(400).json({
+            message: `Ocurrió un error al procesar la petición: ${error.message}`,
+            errors,
+        })
+    }
+}
+
+const deleteIncomes = async (req,res) => {
+
+    try{
+      const {id} = req.query;
+      
+        await db.Income.destroy({
+            where: {
+                id: id
+            }
+        })
+
+        res.json({
+            message: 'El estado a sido eliminado'
+        })
+
+      }
+         catch (error){
+            res.status(400).json({ error: "error al momento de borrar el estado"})
+    }
+}
