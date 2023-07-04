@@ -99,3 +99,26 @@ const deleteIncomes = async (req,res) => {
             res.status(400).json({ error: "error al momento de borrar el estado"})
     }
 }
+
+const updateIncomes = async (req,res) => {
+
+    try{
+
+        let {id} = req.query;
+        await db.State.update({...req.body},
+            {
+            where :{
+                id : id
+            },
+
+        })
+
+        res.json({
+            message: 'El estado fue actualizado'
+        })
+
+      }
+         catch (error){
+            res.status(400).json({ error: "error al momento de actualizar el estado"})
+    }
+}
