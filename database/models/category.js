@@ -11,12 +11,11 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       
-     /* models.Category.belongsTo(models.Income,
+      models.Category.hasMany(models.Income,
         {
-          as: 'incomes',
-          foreignKey: 'incomeId'
+          as: "categories",
         });
-    */
+    
     }
   }
   Category.init({
