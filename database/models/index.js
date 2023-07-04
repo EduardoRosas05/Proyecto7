@@ -19,9 +19,11 @@ if (config.use_env_variable) {
 
 import income from './income';
 import category from './category';
+import savings from './savings';
 
 db.Income = income(sequelize, Sequelize.DataTypes);
 db.Category = category(sequelize, Sequelize.DataTypes);
+db.Savings = savings(sequelize, Sequelize.DataTypes);
 
 /*
 fs
