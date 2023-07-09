@@ -21,8 +21,9 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Income.init({
-    acount: DataTypes.STRING,
     description: DataTypes.STRING,
+    acount: DataTypes.STRING,
+    balance: DataTypes.STRING,
     categoryId: DataTypes.INTEGER
   }, {
     sequelize,

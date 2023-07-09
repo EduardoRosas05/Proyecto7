@@ -14,8 +14,8 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Savings.init({
-    moneySaved: DataTypes.STRING,
-    description: DataTypes.STRING,
+    concepto: DataTypes.STRING,
+    monto: DataTypes.STRING,
     balance: DataTypes.STRING
   }, {
     sequelize,
