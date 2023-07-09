@@ -18,8 +18,29 @@ export default function handler(req, res) {
     }
   }
 
+  const addIncomes = async (req, res) =>  {
+    try {
+      const { description, acount, categoryId } = req.body;
   
-const addIncomes = async (req, res) => {
+      // Crea un nuevo registro de gasto
+      await db.Income.create({ description, acount, categoryId });
+  
+      // Calcula el balance actualizado sumando todos las cuentas de los gastos
+      const balance = await db.Income.sum('acount', { raw: true });
+      
+      // Actualiza el balance en todos los registros de la tabla
+      await db.Income.update({ balance }, { where: {}, raw: true });
+  
+      res.status(200).json({ message: 'El ingreso fue agregado correctamente' });
+
+    } catch (error) {
+      console.error('Error al registrar el gasto: ', error);
+      res.status(500).json({ error: 'Ocurrió un error en el servidor' });
+    }
+}
+
+
+/*const addIncomes = async (req, res) => {
     try{
         //los datos vienen del req.body
         console.log(req.body);
@@ -47,7 +68,7 @@ const addIncomes = async (req, res) => {
             errors,
         })
     }
-}
+}*/
 
 const listIncomes = async (req, res) => {
     try{
@@ -80,15 +101,18 @@ const listIncomes = async (req, res) => {
 }
 
 const deleteIncomes = async (req,res) => {
-
     try{
       const {id} = req.query;
-      
+
         await db.Income.destroy({
-            where: {
-                id: id
-            }
+            where: { id: id }
         })
+
+      // Calcula el balance actualizado sumando todos las cuentas de los gastos
+      const balance = await db.Income.sum('acount', { raw: true });
+      
+      // Actualiza el balance en todos los registros de la tabla
+      await db.Income.update({ balance }, { where: {}, raw: true });
 
         res.json({
             message: 'El estado a sido eliminado'
@@ -103,15 +127,16 @@ const deleteIncomes = async (req,res) => {
 const updateIncomes = async (req,res) => {
 
     try{
-
         let {id} = req.query;
         await db.State.update({...req.body},
             {
-            where :{
-                id : id
-            },
-
+            where :{ id : id }
         })
+      // Calcula el balance actualizado sumando todos las cuentas de los gastos
+      const balance = await db.Income.sum('acount', { raw: true });
+      
+      // Actualiza el balance en todos los registros de la tabla
+      await db.Income.update({ balance }, { where: {}, raw: true });
 
         res.json({
             message: 'El estado fue actualizado'
