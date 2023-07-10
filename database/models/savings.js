@@ -16,7 +16,9 @@ module.exports = (sequelize, DataTypes) => {
   Savings.init({
     concepto: DataTypes.STRING,
     monto: DataTypes.STRING,
-    balance: DataTypes.STRING
+    balance: DataTypes.STRING,
+    usersId: DataTypes.INTEGER
+    
   }, {
     sequelize,
     modelName: 'Savings',
