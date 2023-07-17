@@ -11,18 +11,13 @@ export default async function handler(req, res) {
 
     const datosUsuario = {...req.body};
 
-    // asegurar la contraseña
-    // usar bcrypt
-    // salt: generacion de una cadena aleatoria de N longitud
     const salt = await bcrypt.genSalt(10);
 
-    // cifrar la contraseña y meterla en los datos del usuario
     datosUsuario.password = await bcrypt.hash(datosUsuario.password, salt);
 
-    // registrar el usuario
     const user = await db.Users.create(datosUsuario);
 
-    user.password = null; // evitar enviarlo en la respuesta
+    user.password = null; 
 
     res.json({ message: 'El usuario ha sido registrado.', user});
   } catch (error) {
