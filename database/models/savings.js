@@ -3,18 +3,43 @@ const {
   Model
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
+
   class Savings extends Model {
-    
     static associate(models) {
-      // define association here
+      Savings.belongsTo(models.Users, {
+        foreignKey: 'usersId',
+        as: 'user',
+      });
     }
   }
+
   Savings.init({
-    concepto: DataTypes.STRING,
-    monto: DataTypes.STRING,
-    balance: DataTypes.STRING,
+    concepto: {
+      type:DataTypes.STRING,
+      allowNull: false,
+      validate:{
+        notNull:{
+          msg: 'el concepto es obligatorio'
+        },
+        isAlpha:{
+          msg: 'el concepto solo debe contener letras'
+         },
+       }
+    }, 
+      monto: {
+        type:DataTypes.STRING,
+        allowNull: false,
+        validate:{
+          notNull:{
+            msg: 'el monto es obligatorio'
+          },
+          isNumeric: {
+            msg: 'ingresa solo numeros'
+          }
+        }
+    },
+    balance:DataTypes.STRING,
     usersId: DataTypes.INTEGER
-    
   }, {
     sequelize,
     modelName: 'Savings',

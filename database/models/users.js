@@ -6,11 +6,13 @@ const {
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class Users extends Model {
-    
     static associate(models) {
-      // define association here
+      Users.hasMany(models.Savings, {
+        as: 'savings',
+      });
     }
   }
+
   Users.init({
     name: DataTypes.STRING(64),
     username: DataTypes.STRING(64),
@@ -23,8 +25,8 @@ module.exports = (sequelize, DataTypes) => {
     modelName: 'Users',
   });
 
-  Users.prototype.isValidPassword = function(password){
+  /*Users.prototype.isValidPassword = function(password){
     return bcrypt.compareSync(password, this.password);
-  }
+  }*/
   return Users;
 };

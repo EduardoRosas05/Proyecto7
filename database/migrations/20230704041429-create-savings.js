@@ -10,9 +10,11 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       concepto: {
+        allowNull: false,
         type: Sequelize.STRING
       },
       monto: {
+        allowNull: false,
         type: Sequelize.STRING
       },
       balance: {
