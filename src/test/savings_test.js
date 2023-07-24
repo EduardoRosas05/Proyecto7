@@ -12,30 +12,27 @@ describe("mostrar ahorros", () => {
         .get('/savings')
         .send({})
         .end(function(err, res){
-            console.log(res.body);
             expect(res).to.have.status(200);
             done();
         })
     })
 
-    it("Debe rechazar mostrar los ahorros con datos faltantes", (done) =>{
+    it("Debe mostrar los ahorros registrados con el id 45", (done) =>{
         chai.request(url)
-        .get('/savings')
+        .get('/savings?id=45')
         .send({})
         .end(function(err, res){
-            console.log(res.body);
-            expect(res).to.have.status(400);
+            expect(res).to.have.status(200);
             done();
         })
     })
 
-    it("Debe rechazar mostrar los ahorros con datos incorrectos", (done) =>{
+    it("Debe rechazar mostrar los ahorros con id incorrecto", (done) =>{
         chai.request(url)
-        .get('/savings')
+        .get('/savings?id=1')
         .send({})
         .end(function(err, res){
-            console.log(res.body);
-            expect(res).to.have.status(200);
+            expect(res).to.have.status(404);
             done();
         })
     })
@@ -49,7 +46,7 @@ describe("registrar ahorros", () => {
 
             concepto: "Feria",
             monto: 20,
-            usersId: 1
+            clientId: 1
         })
         .end(function(err, res){
             console.log(res.body);
@@ -67,7 +64,6 @@ describe("registrar ahorros", () => {
             usersId: 1
         })
         .end(function(err, res){
-            console.log(res.body);
             expect(res).to.have.status(400);
             done();
         })
@@ -77,32 +73,27 @@ describe("registrar ahorros", () => {
         chai.request(url)
         .post('/savings')
         .send({
-
             concepto: "Feria",
             monto: "Azucar",
             usersId: 1
         })
         .end(function(err, res){
-            console.log(res.body);
             expect(res).to.have.status(400);
             done();
         })
     })
-
 });
 
-/*
 describe("actualizar ahorros", () => {
     it("Debe actualizar un usuarios", (done) =>{
         chai.request(url)
-        .put('/savings/?id=1')
+        .put('/savings/?id=45')
         .send({
 
             concepto: "Colchon",
             monto: 210
         })
         .end(function(err, res){
-            console.log(res.body);
             expect(res).to.have.status(200);
             done();
         })
@@ -116,7 +107,6 @@ describe("actualizar ahorros", () => {
             concepto: "Guardadito"
         })
         .end(function(err, res){
-            console.log(res.body);
             expect(res).to.have.status(400);
             done();
         })
@@ -124,29 +114,26 @@ describe("actualizar ahorros", () => {
 
     it("Debe rechazar actualizar con datos incorrectos", (done) =>{
         chai.request(url)
-        .put('/savings')
+        .put('/savings?id=45')
         .send({
 
             concepto: "Beca",
             monto: "Juanito"
         })
         .end(function(err, res){
-            console.log(res.body);
             expect(res).to.have.status(400);
             done();
         })
     })
 
 
-});
-*/
+})
 describe("borrar ahorros", () => {
     it("Debe borrar un usuarios", (done) =>{
         chai.request(url)
-        .delete('/savings/?id=4')
+        .delete('/savings?id=49')
         .send({})
         .end(function(err, res){
-            console.log(res.body);
             expect(res).to.have.status(200);
             done();
         })
@@ -157,7 +144,6 @@ describe("borrar ahorros", () => {
         .delete('/savings')
         .send({})
         .end(function(err, res){
-            console.log(res.body);
             expect(res).to.have.status(400);
             done();
         })
@@ -168,7 +154,6 @@ describe("borrar ahorros", () => {
         .delete('/savings?id=15')
         .send({})
         .end(function(err, res){
-            console.log(res.body);
             expect(res).to.have.status(404);
             done();
         })

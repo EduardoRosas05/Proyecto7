@@ -22,10 +22,10 @@ export default function handler(req, res) {
   
 const addSavings = async (req, res) =>  {
     try {
-      const { concepto, monto } = req.body;
+      const { concepto, monto, clientId } = req.body;
   
       // Crea un nuevo registro de gasto
-      await db.Savings.create({ concepto, monto });
+      await db.Savings.create({ concepto, monto, clientId });
   
       // Calcula el balance actualizado sumando todos los montos de los gastos
       const balance = await db.Savings.sum('monto', { raw: true });
@@ -57,13 +57,30 @@ const addSavings = async (req, res) =>  {
 
 const listSavings = async (req, res) => {
     try{
+
+      const {id} = req.query;
+
+      if(id){
+        const savings = await db.Savings.findByPk(id);
+        if(!savings){
+          return res.status(404).json({error: true, message: 'No se encontro el id'});
+        }
+        return res.json(savings);
+      } else {
+        const savings = await db.Savings.findAll();
+        return res.json(savings);
+      }
+
+ /*      console.log("Listar");
         //los datos vienen del req.body
-        console.log(req.body);
+        /* console.log(req.body); 
         //guardar cliente
     const category = await db.Savings.findAll({  
+       include:['client'], 
+
     });
         return res.json(category)
-
+ */
         }catch(error){
             console.log(error);
             let errors = []

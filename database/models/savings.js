@@ -6,10 +6,13 @@ module.exports = (sequelize, DataTypes) => {
 
   class Savings extends Model {
     static associate(models) {
-      Savings.belongsTo(models.Users, {
-        foreignKey: 'usersId',
-        as: 'user',
-      });
+
+      models.Savings.belongsTo(models.Clients,
+        {
+          as: 'client',
+          foreignKey: 'clientId'
+        }); 
+
     }
   }
 
@@ -39,7 +42,7 @@ module.exports = (sequelize, DataTypes) => {
         }
     },
     balance:DataTypes.STRING,
-    usersId: DataTypes.INTEGER
+    clientId:DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'Savings',
