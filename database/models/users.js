@@ -5,12 +5,20 @@ const {
   Model
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
+
   class Users extends Model {
-    
+
     static associate(models) {
-      // define association here
+      
+      models.Users.hasMany(models.Savings,
+        {
+          as: "savinegs",
+          foreignKey: "clientId"
+        }); 
+      
     }
   }
+
   Users.init({
     name: DataTypes.STRING(64),
     username: DataTypes.STRING(64),

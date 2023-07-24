@@ -3,15 +3,14 @@ const {
   Model
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class Category extends Model {
-    
+
+  class Category extends Model {  
     static associate(models) {
-      
+
       models.Category.hasMany(models.Income,
         {
-          as: "categories",
-        });
-    
+          as: "categor",
+        }); 
     }
   }
   Category.init({

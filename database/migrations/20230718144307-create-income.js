@@ -25,7 +25,7 @@ module.exports = {
           model: 'Categories',
           key: 'id'
         },
-      },
+      },/*
       usersId: {
         allowNull: false,
         type: Sequelize.INTEGER,
@@ -33,7 +33,7 @@ module.exports = {
           model: 'Users',
           key: 'id'
         },
-      },
+      },*/
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
