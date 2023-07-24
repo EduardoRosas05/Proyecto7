@@ -9,14 +9,14 @@ module.exports = (sequelize, DataTypes) => {
   class Users extends Model {
 
     static associate(models) {
-      /*
-      models.Users.hasMany(models.Savings, {
-        as: 'savings',
-        foreignkey:'usersId'
-      });
-      */
+      
+      models.Users.hasMany(models.Savings,
+        {
+          as: "savinegs",
+          foreignKey: "clientId"
+        }); 
+      
     }
-
   }
 
   Users.init({
@@ -31,8 +31,8 @@ module.exports = (sequelize, DataTypes) => {
     modelName: 'Users',
   });
 
-  /*Users.prototype.isValidPassword = function(password){
+  Users.prototype.isValidPassword = function(password){
     return bcrypt.compareSync(password, this.password);
-  }*/
+  }
   return Users;
 };

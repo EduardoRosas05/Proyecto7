@@ -1,8 +1,19 @@
 import bcrypt from 'bcrypt';
 import db from 'database/models';
 
+export default function handler(req, res) {
+  switch(req.method){
+      case 'POST':
+          return addClient(req, res);
+      case 'GET':
+          return listClient(req, res);
 
-export default async function handler(req, res) {
+      default:
+          res.status(400).json({error: true, message:'Petición errónea'});
+  }
+}
+
+const addClient = async (req, res) =>  {
   try {
     // validar que venga la contraseña
     if (!req.body.password) {
@@ -34,3 +45,33 @@ export default async function handler(req, res) {
     res.json({ error: true, message: 'Error al registrar el usuario', errors });
   }
 };
+
+const listClient = async (req, res) => {
+  try{
+      //los datos vienen del req.body
+      console.log(req.body);
+      //guardar cliente
+  const Clientss1 = await db.Users.findAll({
+      include:['savinegs'],
+  });
+      
+      return res.json(Clientss1)
+  
+  }catch(error){
+      console.log(error);
+      let errors = []
+
+      if(error.errors){
+          //extrae la info
+          errors = error.errors.map((item) => ({
+              error: item.message, 
+              field: item.path,
+          }));
+      }
+
+      return res.status(400).json({
+          message: `Ocurrió un error al procesar la petición: ${error.message}`,
+          errors,
+      })
+  }
+}

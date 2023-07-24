@@ -6,8 +6,8 @@ module.exports = (sequelize, DataTypes) => {
 
   class Savings extends Model {
     static associate(models) {
-
-      models.Savings.belongsTo(models.Clients,
+      //models.Savings.belongsTo(models.Clients,
+      models.Savings.belongsTo(models.Users,
         {
           as: 'client',
           foreignKey: 'clientId'
