@@ -12,14 +12,12 @@ describe("Registrar ingresos.", () => {
         .post('/income')
         .send({
             description: "nuevo",
-            balance: 6,
-            acount: 12,
-            categoryId: 1,
-            usersId: 2
+            acount: 120,
+            categoryId: 1
         })
         .end((err, res) => {
             //console.log(res.body);
-            expect(res).to.have.status(400);
+            expect(res).to.have.status(200);
             expect(res.body).to.have.property('message');
             done();
         });
@@ -30,8 +28,7 @@ describe("Registrar ingresos.", () => {
         .send({
             description: "nuevo",
             acount: 12,
-            categoryId: 1,
-            usersId: 1
+            categoryId: 2
         })
         .end((err, res) => {
             //console.log(res.body);
@@ -46,10 +43,8 @@ describe("Registrar ingresos.", () => {
         .post('/income')
         .send({
             description: "nuevo",
-            balance: 2,
             acount: "holita",
-            categoryId: 1,
-            usersId: 1
+            categoryId: 1
         })
         .end((err, res) => {
             //console.log(res.body);
@@ -100,10 +95,8 @@ describe("Actualización de ingresos.", () => {
         .put('/income?id=2')
         .send({
             description: "nuevo",
-            balance: 6,
-            acount: 12,
+            acount: 140,
             categoryId: 1,
-            usersId: 2
         })
         .end((err, res) => {
             //console.log(res.body);
@@ -127,12 +120,11 @@ describe("Actualización de ingresos.", () => {
         });
     })
 
-    it("Debe rechazar actualizar ingresos sin el balance", (done) => {
+    it("Debe rechazar actualizar ingresos con datos faltantes", (done) => {
         chai.request(url)
         .put('/income')
         .send({
             description: "nuevo",
-            balance: 2,
             acount: 5,
             categoryId: 1,
             usersId: 15
@@ -150,7 +142,7 @@ describe("Actualización de ingresos.", () => {
 describe("Eliminar ingresos.", () => {
     it("Debe elminar un ingreso mediante su id", (done) => {
         chai.request(url)
-        .delete('/income?id=3')
+        .delete('/income?id=5')
         .end((err, res) => {
             //console.log(res.body);
             expect(res).to.have.status(200);

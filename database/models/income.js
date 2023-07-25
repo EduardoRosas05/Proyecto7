@@ -38,20 +38,8 @@ module.exports = (sequelize, DataTypes) => {
         }
       }
     },
-    balance: {
-      type:DataTypes.STRING,
-      allowNull: false,
-      validate:{
-        notNull:{
-          msg: 'el balance es obligatorio'
-        },
-        isNumeric: {
-          msg: 'ingresa solo numeros'
-        }
-      }
-    },
-    categotyId: DataTypes.INTEGER,
-    usersId: DataTypes.INTEGER
+    balance: DataTypes.INTEGER,
+    categoryId: DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'Income',
