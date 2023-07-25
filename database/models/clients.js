@@ -1,27 +1,27 @@
 'use strict';
-import bcrypt from 'bcrypt';
-
 const {
   Model
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-
-  class Users extends Model {
-
+  class Clients extends Model {
+    /**
+     * Helper method for defining associations.
+     * This method is not a part of Sequelize lifecycle.
+     * The `models/index` file will call this method automatically.
+     */
     static associate(models) {
-      
-      models.Users.hasMany(models.Savings,
-        {
+      /*
+      models.Clients.hasMany(models.Savings,
+       {
           as: "savinegs",
           foreignKey: "clientId"
-        }); 
-      
-    }
+        });
+        */
+      }
   }
-
-  Users.init({
+  Clients.init({
     name: {
-      type: DataTypes.STRING(64),
+      type: DataTypes.STRING,
       allowNull: false,
       validate: {
         notNull: {
@@ -33,7 +33,7 @@ module.exports = (sequelize, DataTypes) => {
       },
     },
     username: {
-      type: DataTypes.STRING(64),
+      type: DataTypes.STRING,
       allowNull: false,
       validate: {
         notNull: {
@@ -45,7 +45,7 @@ module.exports = (sequelize, DataTypes) => {
       },
     },
     email: {
-      type: DataTypes.STRING(128),
+      type: DataTypes.STRING,
       allowNull: false,
       unique: true,
       validate: {
@@ -62,16 +62,12 @@ module.exports = (sequelize, DataTypes) => {
       },
       }
     },
-    password: DataTypes.STRING(255),
-    rol: DataTypes.INTEGER,
+    password: DataTypes.STRING,
+    role: DataTypes.INTEGER,
     active: DataTypes.BOOLEAN
   }, {
     sequelize,
-    modelName: 'Users',
+    modelName: 'Clients',
   });
-
-  Users.prototype.isValidPassword = function(password){
-    return bcrypt.compareSync(password, this.password);
-  }
-  return Users;
+  return Clients;
 };

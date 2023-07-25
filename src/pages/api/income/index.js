@@ -34,8 +34,22 @@ export default function handler(req, res) {
       res.status(200).json({ message: 'El ingreso fue agregado correctamente' });
 
     } catch (error) {
-      console.error('Error al registrar el gasto: ', error);
-      res.status(500).json({ error: 'Ocurrió un error en el servidor' });
+
+        console.log(error);
+
+        let errors = [];
+        if (error.errors){
+            errors = error.errors.map((item) => ({
+                error: item.message,
+                field: item.path,
+                }));
+        }
+      return res.status(400).json( {
+        error: true,
+        message: `Ocurrió un error al procesar la petición: ${error.message}`,
+        errors,
+        } 
+      )
     }
 }
 
@@ -128,7 +142,7 @@ const updateIncomes = async (req,res) => {
 
     try{
         let {id} = req.query;
-        await db.State.update({...req.body},
+        await db.Income.update({...req.body},
             {
             where :{ id : id }
         })
@@ -143,7 +157,22 @@ const updateIncomes = async (req,res) => {
         })
 
       }
-         catch (error){
-            res.status(400).json({ error: "error al momento de actualizar el estado"})
+      catch (error) {
+
+        console.log(error);
+
+        let errors = [];
+        if (error.errors){
+            errors = error.errors.map((item) => ({
+                error: item.message,
+                field: item.path,
+                }));
+        }
+      return res.status(400).json( {
+        error: true,
+        message: `Ocurrió un error al procesar la petición: ${error.message}`,
+        errors,
+        } 
+      )
     }
 }

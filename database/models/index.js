@@ -20,11 +20,14 @@ if (config.use_env_variable) {
 import income from './income';
 import category from './category';
 import savings from './savings';
+import clients from './clients';
 import users from './users';
 
 db.Income = income(sequelize, Sequelize.DataTypes);
 db.Category = category(sequelize, Sequelize.DataTypes);
 db.Savings = savings(sequelize, Sequelize.DataTypes);
+db.Clients = clients(sequelize, Sequelize.DataTypes);
+
 db.Users = users(sequelize, Sequelize.DataTypes);
 
 /*

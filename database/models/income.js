@@ -10,22 +10,36 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      
-
-      models.Income.belongsTo(models.Category,
-        {
-          as: 'incomes',
-          foreignKey: 'categoryId'
-        }); 
-
+      // define association here
     }
   }
   Income.init({
-    description: DataTypes.STRING,
-    acount: DataTypes.STRING,
-    balance: DataTypes.STRING,
-    categoryId: DataTypes.INTEGER,
-    usersId: DataTypes.INTEGER
+    description: {
+      type:DataTypes.STRING,
+      allowNull: false,
+      validate:{
+        notNull:{
+          msg: 'la descripción es obligatoria'
+        },
+        isAlpha:{
+          msg: 'La descripción debe contener solo letras'
+        },
+      }
+    }, 
+    acount: {
+      type:DataTypes.STRING,
+      allowNull: false,
+      validate:{
+        notNull:{
+          msg: 'la cuenta es obligatoria'
+        },
+        isNumeric: {
+          msg: 'ingresa solo numeros'
+        }
+      }
+    },
+    balance: DataTypes.INTEGER,
+    categoryId: DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'Income',
