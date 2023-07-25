@@ -52,13 +52,30 @@ const addCategorys = async (req, res) => {
 
 const listCategorys = async (req, res) => {
     try{
+
+      const {id} = req.query;
+
+      if(id){
+        const categor = await db.Category.findByPk(id);
+        if(!categor){
+          return res.status(404).json({error: true, message: 'No se encontro el id'});
+        }
+        return res.json(categor);
+      } else {
+        const categor = await db.Category.findAll();
+        return res.json(categor);
+      }
+
+ /*      console.log("Listar");
         //los datos vienen del req.body
-        console.log(req.body);
+        /* console.log(req.body); 
         //guardar cliente
-    const category = await db.Category.findAll({  
+    const category = await db.Savings.findAll({  
+       include:['client'], 
+
     });
         return res.json(category)
-
+ */
         }catch(error){
             console.log(error);
             let errors = []
@@ -83,11 +100,16 @@ const deleteCategorys = async (req,res) => {
     try{
       const {id} = req.query;
       
-        await db.Category.destroy({
+        const deletedRows = await db.Category.destroy({
             where: {
                 id: id
             }
         })
+
+        if (deletedRows === 0) {
+            // Si no se eliminó ningún registro, significa que el ID no existe
+            return res.status(404).json({ error: "No se encontró el ahorro" });
+          }
 
         res.json({
             message: 'La categoria fue eliminada'
@@ -111,6 +133,7 @@ const updateCategorys = async (req,res) => {
             },
 
         })
+
 
         res.json({
             message: 'La categoria fue actualizada con exito'
