@@ -44,10 +44,9 @@ describe("registrar categorias", () => {
         .post('/category')
         .send({
 
-            name: "Carro"
+            name: "Gatos"
         })
         .end(function(err, res){
-            console.log(res.body);
             expect(res).to.have.status(200);
             done();
         })
@@ -85,7 +84,7 @@ describe("actualizar categorias", () => {
         .put('/category/?id=1')
         .send({
 
-            name: "Medicina"
+            name: "Frijoleps"
         })
         .end(function(err, res){
             expect(res).to.have.status(200);
@@ -125,7 +124,7 @@ describe("actualizar categorias", () => {
 describe("borrar categorias", () => {
     it("Debe borrar una categoria", (done) =>{
         chai.request(url)
-        .delete('/category?id=5')
+        .delete('/category?id=8')
         .send({})
         .end(function(err, res){
             expect(res).to.have.status(200);

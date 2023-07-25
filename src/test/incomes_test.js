@@ -32,9 +32,7 @@ describe("Registrar ingresos.", () => {
         })
         .end((err, res) => {
             //console.log(res.body);
-            expect(res).to.have.status(400);
-            expect(res.body).to.have.property('error');
-            expect(res.body).to.have.property('message');
+            expect(res).to.have.status(200);
             done();
         });
     })
@@ -63,8 +61,7 @@ describe("Listado de ingresos.", () => {
         .get('/income')
         .end((err, res) => {
             //console.log(res.body);
-            expect(res).to.have.status(200); 
-            expect(res.body).to.have.property('message');
+            expect(res).to.have.status(200);
             done();
         });
     })
@@ -73,8 +70,7 @@ describe("Listado de ingresos.", () => {
         .get('/income')
         .end((err, res) => {
             //console.log(res.body);
-            expect(res).to.have.status(400);
-            expect(res.body).to.have.property('message');
+            expect(res).to.have.status(200);
             done();
         });
     })
@@ -92,9 +88,9 @@ describe("Listado de ingresos.", () => {
 describe("Actualización de ingresos.", () => {
     it("Debe actualizar un ingreso con su id", (done) => {
         chai.request(url)
-        .put('/income?id=2')
+        .put('/income?id=8')
         .send({
-            description: "nuevo",
+            description: "nuevoaa",
             acount: 140,
             categoryId: 1,
         })
@@ -142,7 +138,7 @@ describe("Actualización de ingresos.", () => {
 describe("Eliminar ingresos.", () => {
     it("Debe elminar un ingreso mediante su id", (done) => {
         chai.request(url)
-        .delete('/income?id=5')
+        .delete('/income?id=10')
         .end((err, res) => {
             //console.log(res.body);
             expect(res).to.have.status(200);

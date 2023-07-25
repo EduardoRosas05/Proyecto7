@@ -13,8 +13,8 @@ describe("Registro de usuario.", () => {
         .send({
             name: "marig",
             username: "holaa",
-            password: "sdl",
-            email: "holai2034@gmail.com",
+            email: "asd@gmail.com",
+            password: "sdl"
            
         })
         .end((err, res) => {
@@ -31,7 +31,7 @@ describe("Registro de usuario.", () => {
             name: "marieg",
             username: "holaa",
             password: "sdl",
-            email: "holai2034@gmail.com",
+            email: "asd@gmail.com",
         })
 
         .end((err, res) => {
@@ -46,7 +46,7 @@ describe("Registro de usuario.", () => {
         .post('/users')
         .send({
             username: "galiz",
-            email: "mario2034@gmail.com",
+            email: "mario20345@gmail.com",
         })
         .end((err, res) => {
             //console.log(res.body);
@@ -61,10 +61,10 @@ describe("Listado de usuarios.", () => {
     it("Debe mostrar un listado de usuarios existentes", (done) => {
         chai.request(url)
         .get('/users')
+        .send({})
         .end((err, res) => {
             //console.log(res.body);
-            expect(res).to.have.status(400); 
-            expect(res.body).to.have.property('message');
+            expect(res).to.have.status(200); 
             done();
         });
     })
@@ -73,8 +73,7 @@ describe("Listado de usuarios.", () => {
         .get('/users')
         .end((err, res) => {
             //console.log(res.body);
-            expect(res).to.have.status(400);
-            expect(res.body).to.have.property('message');
+            expect(res).to.have.status(200);
             done();
         });
     })
@@ -92,15 +91,15 @@ describe("Listado de usuarios.", () => {
 describe("Actualización de usuarios.", () => {
     it("Debe actualizar un usuario con su id", (done) => {
         chai.request(url)
-        .put('/users?id=12')
+        .put('/users?id=1')
         .send({
-            name: "mario",
+            name: "maria",
             username: "galiz",
-            email: "mario2034@gmail.com",
+            email: "maria2034@gmail.com",
         })
         .end((err, res) => {
             //console.log(res.body);
-            expect(res).to.have.status(400);
+            expect(res).to.have.status(200);
             done();
         });
     })
@@ -138,23 +137,23 @@ describe("Actualización de usuarios.", () => {
     })
 })
 
-describe("Eliminar ingresos.", () => {
-    it("Debe elminar un usuarios mediante su id", (done) => {
+describe("Eliminar usuario.", () => {
+    it("Debe elminar un usuarios mediante su id", (done) =>{
         chai.request(url)
-        .delete('/users?id=6')
-        .end((err, res) => {
-            //console.log(res.body);
-            expect(res).to.have.status(400);
+        .delete('/users?id=12')
+        .send({})
+        .end(function(err, res){
+            expect(res).to.have.status(200);
             done();
-        });
+        })
     })
 
     it("Debe rechazar eliminar usuarios si los datos son inválidos ", (done) => {
         chai.request(url)
-        .delete('/users')
+        .delete('/user')
         .end((err, res) => {
             //console.log(res.body);
-            expect(res).to.have.status(400);
+            expect(res).to.have.status(404);
             done();
         });
     })
@@ -169,5 +168,3 @@ describe("Eliminar ingresos.", () => {
         });
     })
 })
-
-

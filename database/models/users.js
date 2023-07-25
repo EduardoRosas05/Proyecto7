@@ -20,9 +20,48 @@ module.exports = (sequelize, DataTypes) => {
   }
 
   Users.init({
-    name: DataTypes.STRING(64),
-    username: DataTypes.STRING(64),
-    email: DataTypes.STRING(128),
+    name: {
+      type: DataTypes.STRING(64),
+      allowNull: false,
+      validate: {
+        notNull: {
+          msg: 'Es obligatorio agregar un nombre',
+        },
+        isAlpha: {
+          msg: 'El nombre debe contener sólo letras',
+        },
+      },
+    },
+    username: {
+      type: DataTypes.STRING(64),
+      allowNull: false,
+      validate: {
+        notNull: {
+          msg: 'Es obligatorio agregar un apellido',
+        },
+        isAlpha: {
+          msg: 'El apellido debe contener sólo letras',
+        },
+      },
+    },
+    email: {
+      type: DataTypes.STRING(128),
+      allowNull: false,
+      unique: true,
+      validate: {
+        notNull: {
+        msg: 'Es obligatorio agregar un email',
+      },
+      // is: {
+      //   args: ['^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$'],
+      //   msg: 'Debe ingresar un email válido'
+      // }
+      isEmail: {
+        args: true,
+        msg: 'Email no válido'
+      },
+      }
+    },
     password: DataTypes.STRING(255),
     rol: DataTypes.INTEGER,
     active: DataTypes.BOOLEAN

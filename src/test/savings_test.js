@@ -17,9 +17,9 @@ describe("mostrar ahorros", () => {
         })
     })
 
-    it("Debe mostrar los ahorros registrados con el id 45", (done) =>{
+    it("Debe mostrar los ahorros registrados con el id 2", (done) =>{
         chai.request(url)
-        .get('/savings?id=45')
+        .get('/savings?id=2')
         .send({})
         .end(function(err, res){
             expect(res).to.have.status(200);
@@ -49,7 +49,6 @@ describe("registrar ahorros", () => {
             clientId: 1
         })
         .end(function(err, res){
-            console.log(res.body);
             expect(res).to.have.status(200);
             done();
         })
@@ -87,10 +86,10 @@ describe("registrar ahorros", () => {
 describe("actualizar ahorros", () => {
     it("Debe actualizar un usuarios", (done) =>{
         chai.request(url)
-        .put('/savings/?id=45')
+        .put('/savings/?id=2')
         .send({
 
-            concepto: "Colchon",
+            concepto: "Colcahona",
             monto: 210
         })
         .end(function(err, res){
@@ -131,7 +130,7 @@ describe("actualizar ahorros", () => {
 describe("borrar ahorros", () => {
     it("Debe borrar un usuarios", (done) =>{
         chai.request(url)
-        .delete('/savings?id=49')
+        .delete('/savings?id=5')
         .send({})
         .end(function(err, res){
             expect(res).to.have.status(200);

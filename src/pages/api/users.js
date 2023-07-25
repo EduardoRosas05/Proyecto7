@@ -7,7 +7,10 @@ export default function handler(req, res) {
           return addClient(req, res);
       case 'GET':
           return listClient(req, res);
-
+      case 'PUT':
+          return updateClient(req,res);
+      case 'DELETE':
+          return deleteClient(req, res);
       default:
           res.status(400).json({error: true, message:'Petición errónea'});
   }
@@ -73,5 +76,55 @@ const listClient = async (req, res) => {
           message: `Ocurrió un error al procesar la petición: ${error.message}`,
           errors,
       })
+  }
+}
+
+const deleteClient = async (req,res) => {
+
+  try{
+    const {id} = req.query;
+    
+      const deletedRows = await db.Users.destroy({
+          where: {
+              id: id
+          }
+      })
+
+      if (deletedRows === 0) {
+          // Si no se eliminó ningún registro, significa que el ID no existe
+          return res.status(404).json({ error: "No se encontró el ahorro" });
+        }
+
+      res.json({
+          message: 'El usuario fue eliminada'
+      })
+
+    }
+       catch (error){
+          res.status(400).json({ error: "error al momento de borrar la categoria"})
+  }
+}
+
+const updateClient = async (req,res) => {
+
+  try{
+
+      let {id} = req.query;
+      await db.Users.update({...req.body},
+          {
+          where :{
+              id : id
+          },
+
+      })
+
+
+      res.json({
+          message: 'El usuario fue actualizada con exito'
+      })
+
+    }
+       catch (error){
+          res.status(400).json({ error: "error al momento de actualizar el usuario"})
   }
 }
