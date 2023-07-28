@@ -1,0 +1,26 @@
+{
+  "development": {
+    "username": "admin",
+    "password": "UynOUwmE",
+    "database": "Proyecto12",
+    "host": "mysql-137916-0.cloudclusters.net",
+    "port": "18678",
+    "dialect": "mysql"
+  },
+  "test": {
+    "username": "admin",
+    "password": "UynOUwmE",
+    "database": "Proyecto12",
+    "host": "mysql-137916-0.cloudclusters.net",
+    "port": "18678",
+    "dialect": "mysql"
+  },
+  "production": {
+    "username": "admin",
+    "password": "UynOUwmE",
+    "database": "Proyecto12",
+    "host": "mysql-137916-0.cloudclusters.net",
+    "port": "18678",
+    "dialect": "mysql"
+  }
+}

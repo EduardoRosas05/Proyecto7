@@ -1,9 +1,32 @@
-import Head from 'next/head'
+/*import Head from 'next/head'
 import Image from 'next/image'
 import { Inter } from '@next/font/google'
-import styles from '@/styles/Home.module.css'
+//import styles from '@/styles/Home.module.css'
 
 const inter = Inter({ subsets: ['latin'] })
+
+const updateIncomes = async (req,res) => {
+
+  try{
+
+      let {id} = req.query;
+      await db.Income.update({...req.body},
+          {
+          where :{
+              id : id
+          },
+
+      })
+
+      res.json({
+          message: 'El ingreso fue actualizado'
+      })
+
+    }
+       catch (error){
+          res.status(400).json({ error: "error al momento de actualizar el ingreso"})
+  }
+}
 
 export default function Home() {
   return (
@@ -18,7 +41,7 @@ export default function Home() {
         <div className={styles.description}>
           <p>
             Get started by editing&nbsp;
-            <code className={styles.code}>src/pages/index.js</code>
+            <code className={styles.code}>pages/index.js</code>
           </p>
           <div>
             <a
@@ -121,3 +144,9 @@ export default function Home() {
     </>
   )
 }
+*/
+function HomePage() {
+  return <h1>¡Hola, mundo!</h1>;
+}
+
+export default HomePage;
