@@ -4,7 +4,7 @@ let expect = chai.expect;
 
 chai.use(chaiHttp);
 
-const url = 'http://localhost:3000/api';
+const url = 'https://proyecto7-ten.vercel.app/api';
 
 describe("Registro de cliente.", () => {
     it("Debe registrar un nuevo cliente", (done) => {

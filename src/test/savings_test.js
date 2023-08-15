@@ -4,7 +4,7 @@ let expect = chai.expect
 
 chai.use(chaiHttp);
 
-const url = 'http://localhost:3000/api';
+const url = 'https://proyecto7-ten.vercel.app/api';
 
 describe("mostrar ahorros", () => {
     it("Debe mostrar los ahorros registrados", (done) =>{
@@ -19,7 +19,7 @@ describe("mostrar ahorros", () => {
 
     it("Debe mostrar los ahorros registrados con el id 2", (done) =>{
         chai.request(url)
-        .get('/savings?id=2')
+        .get('/savings?id=1')
         .send({})
         .end(function(err, res){
             expect(res).to.have.status(200);
@@ -130,7 +130,7 @@ describe("actualizar ahorros", () => {
 describe("borrar ahorros", () => {
     it("Debe borrar un usuarios", (done) =>{
         chai.request(url)
-        .delete('/savings?id=5')
+        .delete('/savings?id=1')
         .send({})
         .end(function(err, res){
             expect(res).to.have.status(200);

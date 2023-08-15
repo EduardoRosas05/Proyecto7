@@ -4,7 +4,7 @@ let expect = chai.expect
 
 chai.use(chaiHttp);
 
-const url = 'http://localhost:3000/api';
+const url = 'https://proyecto7-ten.vercel.app/api';
 
 describe("mostrar categorias", () => {
     it("Debe mostrar las categorias registradas", (done) =>{
@@ -124,7 +124,7 @@ describe("actualizar categorias", () => {
 describe("borrar categorias", () => {
     it("Debe borrar una categoria", (done) =>{
         chai.request(url)
-        .delete('/category?id=8')
+        .delete('/category?id=1')
         .send({})
         .end(function(err, res){
             expect(res).to.have.status(200);
