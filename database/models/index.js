@@ -1,5 +1,5 @@
 'use strict';
-
+import mysql2 from "mysql2";
 const fs = require('fs');
 const path = require('path');
 const Sequelize = require('sequelize');
@@ -25,6 +25,7 @@ import category from './category';
 import savings from './savings';
 import clients from './clients';
 import users from './users';
+import { ImportExport } from '@mui/icons-material';
 
 db.Income = income(sequelize, Sequelize.DataTypes);
 db.Category = category(sequelize, Sequelize.DataTypes);
