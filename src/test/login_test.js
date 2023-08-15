@@ -4,7 +4,7 @@ let expect = chai.expect;
 
 chai.use(chaiHttp);
 
-const url = 'http://localhost:3000/api';
+const url = 'https://proyecto7-ten.vercel.app/api';
 
 describe("Registro de usuario.", () => {
     it("Debe registrar un nuevo usuario", (done) => {
@@ -140,7 +140,7 @@ describe("Actualización de usuarios.", () => {
 describe("Eliminar usuario.", () => {
     it("Debe elminar un usuarios mediante su id", (done) =>{
         chai.request(url)
-        .delete('/users?id=12')
+        .delete('/users?id=1')
         .send({})
         .end(function(err, res){
             expect(res).to.have.status(200);
