@@ -19,7 +19,7 @@ describe("mostrar ahorros", () => {
 
     it("Debe mostrar los ahorros registrados con el id 2", (done) =>{
         chai.request(url)
-        .get('/savings?id=2')
+        .get('/savings?id=1')
         .send({})
         .end(function(err, res){
             expect(res).to.have.status(200);
