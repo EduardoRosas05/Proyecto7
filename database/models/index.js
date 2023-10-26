@@ -7,9 +7,9 @@ const process = require('process');
 const basename = path.basename(__filename);
 const env = process.env.NODE_ENV || 'development';
 const config = require(__dirname + '/../config/config.json')[env];
-  if(config.dialect === "mysql"){
-    config.dialectModule = mysql2
-  }
+  // if(config.dialect === "mysql"){
+  //   config.dialectModule = mysql2
+  // }
 const db = {};
 
 let sequelize;
@@ -23,14 +23,13 @@ if (config.use_env_variable) {
 import income from './income';
 import category from './category';
 import savings from './savings';
-import clients from './clients';
+// import clients from './clients';
 import users from './users';
-import { ImportExport } from '@mui/icons-material';
 
 db.Income = income(sequelize, Sequelize.DataTypes);
 db.Category = category(sequelize, Sequelize.DataTypes);
 db.Savings = savings(sequelize, Sequelize.DataTypes);
-db.Clients = clients(sequelize, Sequelize.DataTypes);
+// db.Clients = clients(sequelize, Sequelize.DataTypes);
 
 db.Users = users(sequelize, Sequelize.DataTypes);
 

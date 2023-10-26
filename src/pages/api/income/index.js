@@ -20,10 +20,10 @@ export default function handler(req, res) {
 
   const addIncomes = async (req, res) =>  {
     try {
-      const { description, acount, categoryId } = req.body;
+      const { description, acount, categoryId, clientId } = req.body;
   
       // Crea un nuevo registro de gasto
-      await db.Income.create({ description, acount, categoryId });
+      await db.Income.create({ description, acount, categoryId, clientId });
   
       // Calcula el balance actualizado sumando todos las cuentas de los gastos
       const balance = await db.Income.sum('acount', { raw: true });
