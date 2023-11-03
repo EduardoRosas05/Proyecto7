@@ -117,7 +117,7 @@ const deleteCategorys = async (req,res) => {
 
       }
          catch (error){
-            res.status(400).json({ error: "error al momento de borrar la categoria"})
+            res.status(400).json({ error: "No puedes borrar esta categoria, tienes registos guardados"})
     }
 }
 
