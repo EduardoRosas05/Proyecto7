@@ -29,7 +29,7 @@ const addClient = async (req, res) =>  {
 
     datosUsuario.password = await bcrypt.hash(datosUsuario.password, salt);
 
-    const user = await db.Users.create(datosUsuario);
+    const user = await db.User.create(datosUsuario);
 
     user.password = null; 
 
@@ -54,7 +54,7 @@ const listClient = async (req, res) => {
       //los datos vienen del req.body
       console.log(req.body);
       //guardar cliente
-  const Clientss1 = await db.Users.findAll({
+  const Clientss1 = await db.User.findAll({
       include:['savinegs'],
   });
       
@@ -84,7 +84,7 @@ const deleteClient = async (req,res) => {
   try{
     const {id} = req.query;
     
-      const deletedRows = await db.Users.destroy({
+      const deletedRows = await db.User.destroy({
           where: {
               id: id
           }
@@ -110,7 +110,7 @@ const updateClient = async (req,res) => {
   try{
 
       let {id} = req.query;
-      await db.Users.update({...req.body},
+      await db.User.update({...req.body},
           {
           where :{
               id : id

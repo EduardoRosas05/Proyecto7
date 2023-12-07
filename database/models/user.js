@@ -6,11 +6,11 @@ const {
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
 
-  class Users extends Model {
+  class User extends Model {
 
     static associate(models) {
       
-      models.Users.hasMany(models.Savings,
+      models.User.hasMany(models.Savings,
         {
           as: "savinegs",
           foreignKey: "clientId"
@@ -19,19 +19,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
 
-  Users.init({
-    name: {
-      type: DataTypes.STRING(64),
-      allowNull: false,
-      validate: {
-        notNull: {
-          msg: 'Es obligatorio agregar un nombre',
-        },
-        isAlpha: {
-          msg: 'El nombre debe contener sólo letras',
-        },
-      },
-    },
+  User.init({
     username: {
       type: DataTypes.STRING(64),
       allowNull: false,
@@ -63,15 +51,14 @@ module.exports = (sequelize, DataTypes) => {
       }
     },
     password: DataTypes.STRING(255),
-    rol: DataTypes.INTEGER,
-    active: DataTypes.BOOLEAN
+    roleId: DataTypes.INTEGER
   }, {
     sequelize,
-    modelName: 'Users',
+    modelName: 'User',
   });
 
-  Users.prototype.isValidPassword = function(password){
+  User.prototype.isValidPassword = function(password){
     return bcrypt.compareSync(password, this.password);
   }
-  return Users;
+  return User;
 };

@@ -6,7 +6,7 @@ module.exports = (sequelize, DataTypes) => {
   class Income extends Model {
     static associate(models) {
       
-      models.Income.belongsTo(models.Users,
+      models.Income.belongsTo(models.User,
         {
           as: 'client',
           foreignKey: 'clientId'
@@ -20,9 +20,6 @@ module.exports = (sequelize, DataTypes) => {
       validate:{
         notNull:{
           msg: 'la descripción es obligatoria'
-        },
-        isAlpha:{
-          msg: 'La descripción debe contener solo letras'
         },
       }
     }, 

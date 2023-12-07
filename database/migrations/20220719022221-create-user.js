@@ -9,9 +9,9 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      name: {
-        type: Sequelize.STRING(64)
-      },
+      // name: {
+      //   type: Sequelize.STRING(64)
+      // },
       username: {
         type: Sequelize.STRING(64),
         unique: true,
@@ -23,13 +23,13 @@ module.exports = {
       password: {
         type: Sequelize.STRING(255)
       },
-      rol: {
+      roleId: {
         type: Sequelize.INTEGER,
-        defaultValue: 0
-      },
-      active: {
-        type: Sequelize.BOOLEAN,
-        defaultValue: true,
+        allowNull: false,
+        references: {
+          model: 'Roles',
+          key: 'id'
+        }
       },
       
       createdAt: {

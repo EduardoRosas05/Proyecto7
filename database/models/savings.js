@@ -7,7 +7,7 @@ module.exports = (sequelize, DataTypes) => {
   class Savings extends Model {
     static associate(models) {
       //models.Savings.belongsTo(models.Clients,
-      models.Savings.belongsTo(models.Users,
+      models.Savings.belongsTo(models.User,
         {
           as: 'client',
           foreignKey: 'clientId'
@@ -24,9 +24,6 @@ module.exports = (sequelize, DataTypes) => {
         notNull:{
           msg: 'el concepto es obligatorio'
         },
-        isAlpha:{
-          msg: 'el concepto solo debe contener letras'
-         },
        }
     }, 
       monto: {
